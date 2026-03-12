@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>College Event</title>
+<title>College Event</title>
+<style>
+body{
+    margin:0;
+    padding:0;
+    background:url('poster.jpg.jpg') no-repeat center center/cover;
+    height:100vh;
+    font-family:Arial;
+}
+.button-box{
+    position:absolute;
+    bottom:30px;
+    right:30px;
+}
+button{
+    padding:12px 25px;
+    margin:10px;
+    font-size:18px;
+    border:none;
+    border-radius:8px;
+}
+.admin{
+    background:red;
+    color:white;
+}
+.user{
+    background:green;
+    color:white;
+}
+</style>
 </head>
 <body>
-    <h1>Welcome to College Event</h1>
-    <p>This website is created by Logeshwaran R</p>
+
+<div class="button-box">
+<button class="admin">Admin Login</button>
+<button class="user">User Login</button>
+</div>
+
 </body>
 </html>
