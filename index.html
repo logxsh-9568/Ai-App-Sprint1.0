@@ -12,7 +12,7 @@ font-family:Arial;
 scroll-behavior:smooth;
 }
 
-/* FRONT PAGE */
+/* FIRST PAGE */
 
 .front{
 height:100vh;
@@ -26,179 +26,69 @@ position:absolute;
 bottom:20px;
 left:50%;
 transform:translateX(-50%);
-padding:12px 25px;
-background:red;
+padding:10px 22px;
+background:#444;
 color:white;
 border:none;
-border-radius:8px;
+border-radius:6px;
 cursor:pointer;
-font-size:18px;
+font-size:16px;
 }
 
 /* SECOND PAGE */
 
 .second{
-min-height:100vh;
-background:linear-gradient(135deg,#141e30,#243b55,#0f2027);
-color:white;
+height:100vh;
+background:white;
 text-align:center;
-padding:40px;
-}
-
-.login-buttons{
-margin-bottom:30px;
-}
-
-.login-buttons button{
-padding:12px 25px;
-margin:10px;
-font-size:18px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-.admin{
-background:red;
-color:white;
-}
-
-.user{
-background:green;
-color:white;
-}
-
-.container{
-width:90%;
-max-width:800px;
-margin:auto;
-background:rgba(0,0,0,0.65);
-padding:40px;
-border-radius:15px;
-}
-
-button{
-margin-top:10px;
-padding:10px 20px;
-border:none;
-border-radius:6px;
-background:#00e6ff;
-color:#002b36;
-cursor:pointer;
-font-weight:bold;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-top:25px;
-}
-
-.card{
-height:80px;
-border-radius:10px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.15);
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+padding:20px;
 }
 
-.revealed{
-background:#00e6ff;
-color:black;
+.second img{
+max-width:700px;
+width:90%;
+height:auto;
+margin-bottom:30px;
 }
 
-.nextBtn{
-margin-top:25px;
-display:none;
+h2{
+font-size:28px;
+margin:10px 0;
+color:#222;
+}
+
+h3{
+font-size:24px;
+margin:10px 0;
+color:#444;
 }
 </style>
 </head>
 
 <body>
 
+<!-- FIRST PAGE -->
+
 <div class="front">
 <button class="scroll-btn" onclick="document.getElementById('next').scrollIntoView()">Next</button>
 </div>
 
+<!-- SECOND PAGE -->
+
 <div class="second" id="next">
 
-<div class="login-buttons">
-<button class="admin">Admin Login</button>
-<button class="user">User Login</button>
-</div>
+<img src="college.jpg" alt="College Banner">
 
-<div class="container" id="content">
+<h2>Department of CSE</h2>
+<h3>(Artificial Intelligence and Machine Learning)</h3>
 
-<h1>INTRA APP DEVELOPMENT CONTEST</h1>
-<h2>Level 1 – Technical Quiz</h2>
-<p>Click below to start quiz</p>
-<button onclick="startQuiz()">Start Quiz</button>
+<h2>Intra Department App Contest 1.0</h2>
 
 </div>
-
-</div>
-
-<script>
-
-let questions=[
-"Student Registration Form","Hospital Appointment Booking System","Employee Registration System",
-"Bus Ticket Booking System","Online Survey Form","Internship Application Form","Calculator",
-"Calendar","Library Membership Form","Online Quiz Application","Food Order Application",
-"Message (Inbox / Outbox)","Gallery","Alarm","Notes","Compass","Music"
-];
-
-let selected=false;
-
-function startQuiz(){
-window.open("https://yourquizlink.com","_blank");
-showTopicPage();
-}
-
-function showTopicPage(){
-let cards="";
-for(let i=0;i<17;i++){
-cards+=`
-<div class="card">
-<p class="q"></p>
-<button onclick="reveal(this,${i})">Reveal</button>
-</div>`;
-}
-
-document.getElementById("content").innerHTML=`
-<h1>Level 2 - Select Your Topic</h1>
-<div class="grid">${cards}</div>
-<button id="nextBtn" class="nextBtn" onclick="technicalPage()">Next</button>
-`;
-}
-
-function reveal(btn,index){
-if(selected) return;
-let card=btn.parentElement;
-card.querySelector(".q").innerText=questions[index];
-card.classList.add("revealed");
-selected=true;
-document.querySelectorAll(".card button").forEach(b=>{
-if(b!==btn){ b.disabled=true; }
-});
-document.getElementById("nextBtn").style.display="inline-block";
-}
-
-function technicalPage(){
-document.getElementById("content").innerHTML=`
-<h1>Level 3 – Technical Test</h1>
-<button onclick="technicalForm()">Open Technical Test Form</button>
-`;
-}
-
-function technicalForm(){
-window.open("https://docs.google.com/forms/d/e/1FAIpQLSdaJDtSHMPhGYxpClndyngY49_0L_2ohp1Lpm3T1xHaAbCm6Q/viewform?usp=publish-editor","_blank");
-}
-
-</script>
 
 </body>
 </html>
