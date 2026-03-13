@@ -10,7 +10,6 @@ scroll-behavior:smooth;
 }
 
 /* First Page */
-
 .front{
 height:100vh;
 background-image:url('poster.jpg.jpg');
@@ -20,7 +19,6 @@ background-repeat:no-repeat;
 }
 
 /* Second Page */
-
 .second{
 height:100vh;
 background:
@@ -49,7 +47,6 @@ color:white;
 }
 
 /* Third Section */
-
 .third{
 min-height:100vh;
 background:linear-gradient(135deg,#141e30,#243b55,#0f2027);
@@ -113,25 +110,16 @@ display:none;
 
 <body>
 
-<!-- Page 1 -->
-
 <div class="front"></div>
 
-<!-- Page 2 -->
-
 <div class="second">
-
 <img src="college.jpg.jpeg">
-
 <h2>Department of CSE</h2>
 <h3>(Artificial Intelligence and Machine Learning)</h3>
 <h2>Intra Department App Contest 1.0</h2>
 <p>Event Date : 14-03-2026</p>
 <p>Venue : AIML Lab</p>
-
 </div>
-
-<!-- Page 3 -->
 
 <div class="third">
 
@@ -142,6 +130,10 @@ display:none;
 <p>Click below to start quiz</p>
 
 <button onclick="startQuiz()">Start Quiz</button>
+
+<br><br>
+
+<button onclick="showTopicPage()">Go To Level 2</button>
 
 </div>
 
@@ -174,18 +166,17 @@ let selected=false;
 function startQuiz(){
 window.location.href="YOUR-QUIZ-LINK";
 }
+
 function showTopicPage(){
 
 let cards="";
 
 for(let i=0;i<17;i++){
-
 cards+=`
 <div class="card">
 <p class="q"></p>
 <button onclick="reveal(this,${i})">Reveal</button>
 </div>`;
-
 }
 
 document.getElementById("content").innerHTML=`
@@ -222,7 +213,6 @@ function technicalPage(){
 document.getElementById("content").innerHTML=`
 
 <h1>Level 3 – Technical Test</h1>
-
 <p>Submit technical project</p>
 
 <button onclick="technicalForm()">Open Technical Form</button>
