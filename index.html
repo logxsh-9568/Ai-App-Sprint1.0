@@ -6,6 +6,7 @@
 body{
 margin:0;
 font-family:Arial;
+scroll-behavior:smooth;
 }
 
 /* First Page */
@@ -22,7 +23,9 @@ background-repeat:no-repeat;
 
 .second{
 height:100vh;
-background-image:url('background.jpeg');
+background:
+linear-gradient(rgba(0,40,80,0.75), rgba(0,40,80,0.75)),
+url('background.jpeg');
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -40,50 +43,232 @@ max-width:90%;
 margin-bottom:30px;
 }
 
-.second h2{
-margin:10px;
-font-size:32px;
-color:white;
-}
-
-.second h3{
-margin:10px;
-font-size:24px;
-color:white;
-}
-
-.second p{
+.second h2,.second h3,.second p{
 margin:8px;
-font-size:24px;
-font-weight:bold;
 color:white;
+}
+
+/* Third Section */
+
+.third{
+min-height:100vh;
+background:linear-gradient(135deg,#141e30,#243b55,#0f2027);
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+.container{
+width:90%;
+max-width:900px;
+background:rgba(0,0,0,0.65);
+padding:40px;
+border-radius:15px;
+}
+
+button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:6px;
+background:#00e6ff;
+color:#002b36;
+cursor:pointer;
+font-weight:bold;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-top:25px;
+}
+
+.card{
+height:80px;
+border-radius:10px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.revealed{
+background:#00e6ff;
+color:black;
+transform:scale(1.05);
+}
+
+.nextBtn{
+margin-top:25px;
+display:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- First Page -->
+<!-- Page 1 -->
 
 <div class="front"></div>
 
-<!-- Second Page -->
+<!-- Page 2 -->
 
 <div class="second">
 
 <img src="college.jpg.jpeg">
 
 <h2>Department of CSE</h2>
-
 <h3>(Artificial Intelligence and Machine Learning)</h3>
-
 <h2>Intra Department App Contest 1.0</h2>
-
 <p>Event Date : 14-03-2026</p>
-
-<p>Venue : Aiml Lab</p>
+<p>Venue : AIML Lab</p>
 
 </div>
+
+<!-- Page 3 -->
+
+<div class="third">
+
+<div class="container" id="content">
+
+<h1>INTRA APP DEVELOPMENT CONTEST</h1>
+<h2>Level 1 – Technical Quiz</h2>
+<p>Click below to start quiz</p>
+
+<button onclick="startQuiz()">Start Quiz</button>
+
+</div>
+
+</div>
+
+<script>
+
+let questions=[
+"Student Registration Form",
+"Hospital Appointment Booking System",
+"Employee Registration System",
+"Bus Ticket Booking System",
+"Online Survey Form",
+"Internship Application Form",
+"Calculator",
+"Calendar",
+"Library Membership Form",
+"Online Quiz Application",
+"Food Order Application",
+"Message (Inbox / Outbox)",
+"Gallery",
+"Alarm",
+"Notes",
+"Compass",
+"Music"
+];
+
+let selected=false;
+
+function startQuiz(){
+window.open("https://yourquizlink.com","_blank");
+showTopicPage();
+}
+
+function showTopicPage(){
+
+let cards="";
+
+for(let i=0;i<17;i++){
+
+cards+=`
+<div class="card">
+<p class="q"></p>
+<button onclick="reveal(this,${i})">Reveal</button>
+</div>`;
+
+}
+
+document.getElementById("content").innerHTML=`
+
+<h1>Level 2 - Select Your Topic</h1>
+<p>Reveal one topic only</p>
+
+<div class="grid">${cards}</div>
+
+<button id="nextBtn" class="nextBtn" onclick="technicalPage()">Next</button>
+
+`;
+}
+
+function reveal(btn,index){
+
+if(selected) return;
+
+let card=btn.parentElement;
+card.querySelector(".q").innerText=questions[index];
+card.classList.add("revealed");
+
+selected=true;
+
+document.querySelectorAll(".card button").forEach(b=>{
+if(b!==btn){ b.disabled=true; }
+});
+
+document.getElementById("nextBtn").style.display="inline-block";
+}
+
+function technicalPage(){
+
+document.getElementById("content").innerHTML=`
+
+<h1>Level 3 – Technical Test</h1>
+
+<p>Submit technical project</p>
+
+<button onclick="technicalForm()">Open Technical Form</button>
+
+`;
+}
+
+function technicalForm(){
+
+window.open("https://docs.google.com/forms/d/e/1FAIpQLSdaJDtSHMPhGYxpClndyngY49_0L_2ohp1Lpm3T1xHaAbCm6Q/viewform?usp=publish-editor","_blank");
+
+document.getElementById("content").innerHTML=`
+
+<h1>Level 4 – Innovative Test</h1>
+
+<button onclick="innovativePage()">Next</button>
+
+`;
+}
+
+function innovativePage(){
+
+document.getElementById("content").innerHTML=`
+
+<h1>Innovative Test</h1>
+
+<button onclick="innovativeForm()">Open Submission Form</button>
+
+`;
+}
+
+function innovativeForm(){
+
+window.open("https://docs.google.com/forms/d/e/1FAIpQLSdFcEPPmdc31tPw3o4eJNxDQ4VrBqE1udGQSi9x7f9eOYidDw/viewform?usp=publish-editor","_blank");
+
+document.getElementById("content").innerHTML=`
+
+<h1>Competition Completed</h1>
+<h2>Thank You</h2>
+
+`;
+}
+
+</script>
 
 </body>
 </html>
