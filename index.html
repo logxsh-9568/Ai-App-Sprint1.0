@@ -102,11 +102,12 @@ color:black;
 transform:scale(1.05);
 }
 
+/* Submit APK button */
 .nextBtn{
 display:none;
 position:fixed;
-right:20px;
-bottom:20px;
+right:25px;
+bottom:25px;
 z-index:9999;
 padding:14px 24px;
 font-size:16px;
@@ -192,7 +193,7 @@ document.getElementById("content").innerHTML=`
 
 <div class="grid">${cards}</div>
 
-<button id="nextBtn" class="nextBtn" onclick="technicalPage()">Submit APK</button>
+<button id="nextBtn" class="nextBtn" onclick="openForm()">Submit APK</button>
 
 `;
 }
@@ -214,10 +215,12 @@ if(b!==btn){ b.disabled=true; }
 document.getElementById("nextBtn").style.display="inline-block";
 }
 
-function technicalPage(){
+/* Direct form open */
+function openForm(){
 window.open("https://docs.google.com/forms/d/e/1FAIpQLSdaJDtSHMPhGYxpClndyngY49_0L_2ohp1Lpm3T1xHaAbCm6Q/viewform?usp=publish-editor","_blank");
 }
 
+/* Back from quiz auto Level 2 */
 window.addEventListener("pageshow", function(){
 if(sessionStorage.getItem("openLevel2")=="yes"){
 showTopicPage();
