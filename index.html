@@ -7,9 +7,11 @@ body{
 margin:0;
 font-family:Arial;
 scroll-behavior:smooth;
+background:linear-gradient(135deg,#141e30,#243b55,#0f2027);
+color:white;
+text-align:center;
 }
 
-/* First Page */
 .front{
 height:100vh;
 background-image:url('poster.jpg.jpg');
@@ -18,7 +20,6 @@ background-position:center;
 background-repeat:no-repeat;
 }
 
-/* Second Page */
 .second{
 height:100vh;
 background:
@@ -41,41 +42,30 @@ max-width:90%;
 margin-bottom:30px;
 }
 
-.second h2,.second h3,.second p{
-margin:8px;
-color:white;
-}
-
-/* Third Section */
 .third{
 min-height:100vh;
-background:linear-gradient(135deg,#141e30,#243b55,#0f2027);
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
-text-align:center;
 padding:40px;
 }
 
 .container{
 width:90%;
-max-width:900px;
+max-width:1000px;
 background:rgba(0,0,0,0.65);
 padding:40px;
 border-radius:15px;
-position:relative;
 }
 
 button{
-margin-top:10px;
 padding:10px 20px;
 border:none;
-border-radius:6px;
-background:#00e6ff;
-color:#002b36;
+border-radius:8px;
+background:#00eaff;
 cursor:pointer;
 font-weight:bold;
+margin-top:10px;
 }
 
 .grid{
@@ -86,7 +76,7 @@ margin-top:25px;
 }
 
 .card{
-height:80px;
+height:90px;
 border-radius:10px;
 background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.15);
@@ -96,13 +86,6 @@ justify-content:center;
 align-items:center;
 }
 
-.revealed{
-background:#00e6ff;
-color:black;
-transform:scale(1.05);
-}
-
-/* Submit APK button */
 .nextBtn{
 display:none;
 position:fixed;
@@ -110,8 +93,6 @@ right:25px;
 bottom:25px;
 z-index:9999;
 padding:14px 24px;
-font-size:16px;
-box-shadow:0 0 15px rgba(0,230,255,0.8);
 }
 </style>
 </head>
@@ -130,7 +111,6 @@ box-shadow:0 0 15px rgba(0,230,255,0.8);
 </div>
 
 <div class="third">
-
 <div class="container" id="content">
 
 <h1>INTRA DEPARTMENT APP CONTEST 1.0</h1>
@@ -140,7 +120,6 @@ box-shadow:0 0 15px rgba(0,230,255,0.8);
 <button onclick="startQuiz()">Start Quiz</button>
 
 </div>
-
 </div>
 
 <script>
@@ -165,6 +144,19 @@ let questions=[
 "Music"
 ];
 
+let innovativeTopics=[
+"Smart Waste & Recycling App",
+"AI Study Planner App",
+"Plant Disease Detection App",
+"Food Donation App",
+"Smart Parking Finder",
+"Mobile Banking System",
+"Medicine Reminder App",
+"College Event Tracker",
+"Fitness Tracker",
+"Volunteer Management App"
+];
+
 let selected=false;
 
 function startQuiz(){
@@ -175,7 +167,6 @@ window.location.href="YOUR-QUIZ-LINK";
 function showTopicPage(){
 
 selected=false;
-
 let cards="";
 
 for(let i=0;i<17;i++){
@@ -187,14 +178,10 @@ cards+=`
 }
 
 document.getElementById("content").innerHTML=`
-
 <h1>Level 2 – Logical Test</h1>
 <p>Reveal one topic only</p>
-
 <div class="grid">${cards}</div>
-
 <button id="nextBtn" class="nextBtn" onclick="openForm()">Submit APK</button>
-
 `;
 }
 
@@ -204,7 +191,6 @@ if(selected) return;
 
 let card=btn.parentElement;
 card.querySelector(".q").innerText=questions[index];
-card.classList.add("revealed");
 
 selected=true;
 
@@ -215,19 +201,59 @@ if(b!==btn){ b.disabled=true; }
 document.getElementById("nextBtn").style.display="inline-block";
 }
 
-/* Direct form open */
 function openForm(){
+sessionStorage.setItem("openLevel3","yes");
 window.open("https://docs.google.com/forms/d/e/1FAIpQLSdaJDtSHMPhGYxpClndyngY49_0L_2ohp1Lpm3T1xHaAbCm6Q/viewform?usp=publish-editor","_blank");
 }
 
-/* Back from quiz auto Level 2 */
+function showLevel3(){
+
+selected=false;
+let cards="";
+
+for(let i=0;i<10;i++){
+cards+=`
+<div class="card">
+<p class="q"></p>
+<button onclick="revealLevel3(this,${i})">Reveal</button>
+</div>`;
+}
+
+document.getElementById("content").innerHTML=`
+<h1>Level 3 - Innovative Challenge</h1>
+<p>Reveal one topic only</p>
+<div class="grid">${cards}</div>
+`;
+}
+
+function revealLevel3(btn,index){
+
+if(selected) return;
+
+let card=btn.parentElement;
+card.querySelector(".q").innerText=innovativeTopics[index];
+
+selected=true;
+
+document.querySelectorAll(".card button").forEach(b=>{
+if(b!==btn){ b.disabled=true; }
+});
+}
+
 window.addEventListener("pageshow", function(){
+
+if(sessionStorage.getItem("openLevel3")=="yes"){
+showLevel3();
+sessionStorage.removeItem("openLevel3");
+return;
+}
+
 if(sessionStorage.getItem("openLevel2")=="yes"){
 showTopicPage();
 sessionStorage.removeItem("openLevel2");
 }
-});
 
+});
 </script>
 
 </body>
