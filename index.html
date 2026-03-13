@@ -133,7 +133,7 @@ display:none;
 
 <br><br>
 
-<button onclick="showTopicPage()">Go To Level 2</button>
+<button onclick="showTopicPage()">Back To Website</button>
 
 </div>
 
@@ -164,10 +164,12 @@ let questions=[
 let selected=false;
 
 function startQuiz(){
-window.location.href="YOUR-QUIZ-LINK";
+window.open("YOUR-QUIZ-LINK","_blank");
 }
 
 function showTopicPage(){
+
+selected=false;
 
 let cards="";
 
@@ -175,13 +177,13 @@ for(let i=0;i<17;i++){
 cards+=`
 <div class="card">
 <p class="q"></p>
-<button onclick="reveal(this,${i})">Reveal</button>
+<button onclick="reveal(this,${i})">Reveal Question</button>
 </div>`;
 }
 
 document.getElementById("content").innerHTML=`
 
-<h1>Level 2 - Select Your Topic</h1>
+<h1>Level 2 – Logical Test</h1>
 <p>Reveal one topic only</p>
 
 <div class="grid">${cards}</div>
